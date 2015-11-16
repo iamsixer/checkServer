@@ -82,6 +82,8 @@ set charset="utf-8"
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-# excute each 9pm every day
+# excute each 9pm every day to give general notification when set "true"
 0 21 * * * sh /home/checkServer/checkServer.sh true
+# excute each hour to give special notification like 'cpu warning' or 'memory warning' when set "false"
+0 * * * * sh /home/checkServer/checkServer.sh false
 ```
