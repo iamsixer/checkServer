@@ -52,7 +52,10 @@ checkServer()
 }
 
 # 物理内存  
-Mem=`free | awk '/Mem/ {print int($3/$2*100)}'` 
+# 1p: 取一行， 2：第二行
+total_mem = `free | sed -n "2, 1p" | awk '{print $2}'`
+free_mem = `free | sed -n "3, 1p" | awk '{print $4}'`
+Mem=free_mem/total_mem*100
 # 虚拟内存
 #SWAP=`free | awk '/Swap/ {print int($3/$2*100)}'`
 # CPU占用率
