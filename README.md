@@ -114,3 +114,29 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 #### Methods
 
 - checkServer(): generate system info and send emails to the specifical email address.
+
+#### Attention
+
+- sar command need to set `ENABLED` to be true in `/etc/default/sysstat`.
+
+```
+#
+# Default settings for /etc/init.d/sysstat, /etc/cron.d/sysstat
+# and /etc/cron.daily/sysstat files
+#
+
+# Should sadc collect system activity informations? Valid values
+# are "true" and "false". Please do not put other values, they
+# will be overwritten by debconf!
+ENABLED="true"
+
+# Additional options passed to sa1 by /etc/init.d/sysstat
+# and /etc/cron.d/sysstat
+# By default contains the `-S DISK' option responsible for
+# generating disk statisitcs.
+SA1_OPTIONS="-S DISK"
+
+# Additional options passed to sa2 by /etc/cron.daily/sysstat.
+SA2_OPTIONS=""
+
+```
