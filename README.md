@@ -138,5 +138,11 @@ SA1_OPTIONS="-S DISK"
 
 # Additional options passed to sa2 by /etc/cron.daily/sysstat.
 SA2_OPTIONS=""
+```
+- if `ENABLED` is not true, you may get the following result when runing `sar`
 
+```
+root@xxx:/home/checkServer# sar
+Cannot open /var/log/sysstat/sa16: No such file or directory
+Please check if data collecting is enabled in /etc/default/sysstat
 ```
