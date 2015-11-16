@@ -115,6 +115,13 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 
 - checkServer(): generate system info and send emails to the specifical email address.
 
+#### Extract Number
+
+- get the row 3 and column 3 of `top` command:
+	```bash
+`free | sed -n "3, 1p" | awk '{print int($3)}'`
+```
+
 #### Attention
 
 - sar command need to set `ENABLED` to be true in `/etc/default/sysstat`.
@@ -146,3 +153,4 @@ root@xxx:/home/checkServer# sar
 Cannot open /var/log/sysstat/sa16: No such file or directory
 Please check if data collecting is enabled in /etc/default/sysstat
 ```
+
