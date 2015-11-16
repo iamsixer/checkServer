@@ -1,7 +1,7 @@
 # checkServer
 
 ## Description
-- summary: a shell script to check whether the server is normal with its cpu or its memory, which will send emails to notify when it's not.
+- summary: a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not.
 - license: MIT
 
 <br />
