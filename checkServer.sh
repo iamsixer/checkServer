@@ -67,23 +67,23 @@ Mem=$(awk 'BEGIN{print int('$used_mem'/'$total_mem'*100) }')
 # CPU占用率
 Cpu=`sar | awk '/Average/ {print int($3)}'`
 # 系统负载
-Load = `uptime | awk '{print $NF}'`
+Load=`uptime | awk '{print $NF}'`
 
-if [ $Mem -gt $MAX_mem ];then
-	EMAIL_CONTENT="Memory Warning! Current memory of Voice-in Server is $Men%, which is over than the max_mem_value $MAX_mem%\n"
-	$(checkServer "Memory_Warning!");
-fi
-
-if [ $Cpu -gt $MAX_cpu ];then
-	EMAIL_CONTENT="CPU Warning! Current cpu of Voice-in Server is $Cpu%, which is over than the max_cpu_value $MAX_cpu%\n"
-	$(checkServer "CPU_Warning!");
-fi
-
-if [ `echo "$Load > $MAX_load_average" | bc` -eq 1 ];then
-	EMAIL_CONTENT="Load Average Warning! Current $Load%, which is greater than the max_load_average $MAX_load_average%\n"
-	$(checkServer "Load_Average_Warning!");
-fi
-
-if $NORMAL_CHECK;[ $Cpu -lt $MAX_cpu ];[ $Mem -lt $MAX_mem ];then
+if $NORMAL_CHECK;then
 	$(checkServer "Check_Server_Log");
+else
+	if [ $Mem -gt $MAX_mem ];then
+		EMAIL_CONTENT="Memory Warning! Current memory of Voice-in Server is $Men%, which is over than the max_mem_value $MAX_mem%\n"
+		$(checkServer "Memory_Warning!");
+	fi
+
+	if [ $Cpu -gt $MAX_cpu ];then
+		EMAIL_CONTENT="CPU Warning! Current cpu of Voice-in Server is $Cpu%, which is over than the max_cpu_value $MAX_cpu%\n"
+		$(checkServer "CPU_Warning!");
+	fi
+
+	if [ $(awk 'BEGIN{if('$Load'>'$MAX_load_average') {printf 1} else {print 0}}') -eq 1 ];then
+		EMAIL_CONTENT="Load Average Warning! Current $Load%, which is greater than the max_load_average $MAX_load_average%\n"
+		$(checkServer "Load_Average_Warning!");
+	fi
 fi
