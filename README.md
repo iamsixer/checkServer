@@ -118,6 +118,7 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 #### Extract Number
 
 - get the row 3 and column 3 of `top` command:
+
 	```bash
 `free | sed -n "3, 1p" | awk '{print int($3)}'`
 ```
