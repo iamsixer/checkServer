@@ -43,7 +43,7 @@ set charset="utf-8"
 
 ##### Send Emails
 	
-	```bash
+```bash
 echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 ```
 
