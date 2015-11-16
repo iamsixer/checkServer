@@ -79,7 +79,7 @@ if [ $Cpu -gt $MAX_cpu ];then
 	$(checkServer "CPU_Warning!");
 fi
 
-if [ $Load -gt $MAX_load_average ];then
+if [ `echo "$Load > $MAX_load_average" | bc` -eq 1 ];then
 	EMAIL_CONTENT="Load Average Warning! Current $Load%, which is greater than the max_load_average $MAX_load_average%\n"
 	$(checkServer "Load_Average_Warning!");
 fi
