@@ -25,3 +25,5 @@ export TERM=linux
 # network check
 `which sar` -n DEV ${DELAY} ${COUNT} > ${DIR}/net_${DAT}.log 2>&1 &
 #/usr/bin/sar -n EDEV ${DELAY} ${COUNT} > ${DIR}/net_edev_${DAT}.log 2>&1 &
+# load average check
+`which uptime` > ${DIR}/load_average_${DAT}.log 2>&1 &

@@ -7,6 +7,7 @@ NORMAL_CHECK=$1
 MAX_mem=95
 MAX_swap=20
 MAX_cpu=70
+MAX_load_average=5
 DELAY=1
 COUNT=1
 
@@ -15,6 +16,7 @@ top_command=`which top`
 sar_command=`which sar`
 iostat_command=`which iostat`
 free_command=`which free`
+load_average_command=`which uptime`
 
 checkServer()
 {
@@ -40,6 +42,10 @@ checkServer()
 	NETWORK_CHECK=`$sar_command -n DEV ${DELAY} ${COUNT}`
 	NETWORK_CHECK_TITLE="=============================Network Check====================================="
 	NETWORK_CHECK_TAIL="============================================================================"
+
+	LOAD_AVERAVGE_CHECK=`$load_average_command`
+	LOAD_AVERAVGE_TITLE="=============================Load Average Check====================================="
+	LOAD_AVERAVGE_TAIL="============================================================================"
 	
 	EMAIL_CONTENT="$EMAIL_CONTENT$GENERAL_CHECK_TITLE\n$GENERAL_CHECK\n$GENERAL_CHECK_TAIL\n"
 	EMAIL_CONTENT="$EMAIL_CONTENT$CPU_CHECK_TITLE\n$CPU_CHECK\n$CPU_CHECK_TAIL\n"
@@ -57,6 +63,8 @@ Mem=`free | awk '/Mem/ {print int($3/$2*100)}'`
 #SWAP=`free | awk '/Swap/ {print int($3/$2*100)}'`
 # CPU占用率
 Cpu=`sar | awk '/Average/ {print int($3)}'`
+# 系统负载
+Load = `uptime | awk '{print $NF}'`
 
 if [ $Mem -gt $MAX_mem ];then
 	EMAIL_CONTENT="Memory Warning! Current memory of Voice-in Server is $Men%, which is over than the max_mem_value $MAX_mem%\n"
@@ -66,6 +74,11 @@ fi
 if [ $Cpu -gt $MAX_cpu ];then
 	EMAIL_CONTENT="CPU Warning! Current cpu of Voice-in Server is $Cpu%, which is over than the max_cpu_value $MAX_cpu%\n"
 	$(checkServer "CPU_Warning!");
+fi
+
+if [ $Load -gt $MAX_load_average ];then
+	EMAIL_CONTENT="Load Average Warning! Current $Load%, which is greater than the max_load_average $MAX_load_average%\n"
+	$(checkServer "Load_Average_Warning!");
 fi
 
 if $NORMAL_CHECK;[ $Cpu -lt $MAX_cpu ];[ $Mem -lt $MAX_mem ];then
