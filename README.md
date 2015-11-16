@@ -9,7 +9,10 @@
 
 ## Mutt
 
-- This script has used **mutt** server to send emails, so you must setup it first.
+- This script has used **Mutt** server to send emails, so you must setup it first.
+- **Mutt**: mutt is an email client for linux in terminal, which supports *POP* and *IMAP*.
+
+<br />
 
 #### Ubuntu
 
@@ -25,19 +28,12 @@ $ apt-get install mutt
 
 - set `.muttrc` in the `~` directory of root user.
 
-```bash
-$ sudo vim /root/.muttrc
-```
-or
-```
-$ sudo vim ~/.muttrc
-```
-
 ```
 # .mutttrc file
+# sudo vi ~/.muttrc or /root/.muttrc
 set envelope_from=yes
 # the name of who sent the mail
-set from=voicein@soundtooth.cn
+set from=xxx@soundtooth.cn
 # the real name of who send the mail
 set realname="VoiceIn Website"
 set use_from=yes
@@ -45,8 +41,8 @@ set rfc2047_parameters=yes
 set charset="utf-8"
 ```
 
-#### Fedora
+<br />
 
-```bash
-$ yum -y install mutt
-```
+#### Fedora/CentOS
+
+##### more details in [http://www.wilf.cn/post/centos-mutt-msmtp-setup.html](http://www.wilf.cn/post/centos-mutt-msmtp-setup.html)
