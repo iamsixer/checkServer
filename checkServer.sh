@@ -48,6 +48,7 @@ checkServer()
 	EMAIL_CONTENT="$EMAIL_CONTENT$NETWORK_CHECK_TITLE\n$NETWORK_CHECK\n$NETWORK_CHECK_TAIL\n"
 	# send emails
 	echo "$EMAIL_CONTENT" | `which mutt` -s $1 aleen42@vip.qq.com
+	echo "$EMAIL_CONTENT" | `which mutt` -s $1 15521028248@163.com
 }
 
 # 物理内存  

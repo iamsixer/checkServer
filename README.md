@@ -41,12 +41,17 @@ set rfc2047_parameters=yes
 set charset="utf-8"
 ```
 
+##### Send Emails
+	
+	```bash
+echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
+```
+
 <br />
 
 #### Fedora/CentOS
 
 ##### more details in [http://www.wilf.cn/post/centos-mutt-msmtp-setup.html](http://www.wilf.cn/post/centos-mutt-msmtp-setup.html)
-
 
 <br />
 <br />
@@ -84,6 +89,28 @@ set charset="utf-8"
 # m h  dom mon dow   command
 # excute each 9pm every day to give general notification when set "true"
 0 21 * * * sh /home/checkServer/checkServer.sh true
-# excute each hour to give special notification like 'cpu warning' or 'memory warning' when set "false"
+# excute each hour to give special notification like 'memory warning' when set "false"
 0 * * * * sh /home/checkServer/checkServer.sh false
 ```
+
+<br />
+<br />
+
+## 3. Shell
+
+#### Parameters
+
+- MAX_mem(%): the upper edge of physical memory warning.
+- MAX_cpu(%): the upper edge of physical cpu warning.
+- DELAY(s): update every [delay] seconds.
+- COUNT: update [count] times.
+- NORMAL_CHECK: to identify whether it's normal check each day.
+- sh_command: point out where `sh` command is.
+- top_command: point out where `top` command is.
+- sar_command: point out where `sar` command is.
+- iostat_command: point out where `iostat` command is.
+- free_command: point out where `free` command is.
+
+#### Methods
+
+- checkServer(): generate system info and send emails to the specifical email address.
