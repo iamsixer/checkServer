@@ -21,7 +21,7 @@ load_average_command=`which uptime`
 checkServer()
 {
 	# record files
-	`$sh_command /home/checkServer/monitor.sh`
+	`$sh_command $(pwd)/monitor.sh`
 
 	GENERAL_CHECK=`$top_command -b -d ${DELAY} -n ${COUNT}`
 	GENERAL_CHECK_TITLE="===============================General Check================================"
@@ -56,6 +56,7 @@ checkServer()
 	# send emails
 	echo "$EMAIL_CONTENT" | `which mutt` -s $1 aleen42@vip.qq.com
 	echo "$EMAIL_CONTENT" | `which mutt` -s $1 15521028248@163.com
+	echo "$EMAIL_CONTENT" | `which mutt` -s $1 $2
 }
 
 # 物理内存  
@@ -71,16 +72,16 @@ Cpu=`sar | awk '/Average/ {print int($3)}'`
 Load=`uptime | awk '{print $NF}'`
 
 if $NORMAL_CHECK;then
-	$(checkServer "Check_Server_Log");
+	$(checkServer "Check_Server_Log" $2);
 else
 	if [ $Mem -gt $MAX_mem ];then
 		EMAIL_CONTENT="Memory Warning! Current memory of Voice-in Server is $Men%, which is over than the max_mem_value $MAX_mem%\n"
-		$(checkServer "Memory_Warning!");
+		$(checkServer "Memory_Warning!" $2);
 	fi
 
 	if [ $Cpu -gt $MAX_cpu ];then
 		EMAIL_CONTENT="CPU Warning! Current cpu of Voice-in Server is $Cpu%, which is over than the max_cpu_value $MAX_cpu%\n"
-		$(checkServer "CPU_Warning!");
+		$(checkServer "CPU_Warning!" $2);
 	fi
 
 	if [ $(awk 'BEGIN{if('$Load'>'$MAX_load_average') {printf 1} else {print 0}}') -eq 1 ];then
