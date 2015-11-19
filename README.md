@@ -169,6 +169,6 @@ git clone https://github.com/SoundTooth/checkServer.git
 # options:
 #	true: normal check
 #	false: warning check
-sh ./checkServer <options: true> email_addr
+sh ./checkServer/checkServer.sh <options: true> email_addr
 ```
 
