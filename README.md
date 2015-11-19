@@ -163,6 +163,16 @@ Please check if data collecting is enabled in /etc/default/sysstat
 git clone https://github.com/SoundTooth/checkServer.git
 ```
 
+#### Check commands
+
+```sh
+mutt
+```
+
+```sh
+sar
+```
+
 #### Excute
 
 ```sh
