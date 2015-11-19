@@ -2,7 +2,7 @@
 
 ## Description
 - summary: a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not.
-- license: MIT
+- license: [**MIT**](https://github.com/SoundTooth/checkServer/blob/master/LICENSE)
 
 <br />
 <br />
