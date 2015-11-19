@@ -155,3 +155,20 @@ Cannot open /var/log/sysstat/sa16: No such file or directory
 Please check if data collecting is enabled in /etc/default/sysstat
 ```
 
+## 4. How to use
+
+#### Clone
+
+```sh
+git clone https://github.com/SoundTooth/checkServer.git
+```
+
+#### Excute
+
+```sh
+# options:
+#	true: normal check
+#	false: warning check
+sh ./checkServer <options: true> email_addr
+```
+
