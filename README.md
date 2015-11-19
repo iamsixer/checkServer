@@ -169,6 +169,7 @@ git clone https://github.com/SoundTooth/checkServer.git
 # options:
 #	true: normal check
 #	false: warning check
+# email_addr: the email you want to receive infos of the server
 sh ./checkServer/checkServer.sh <options: true> <email_addr: aleen42@vip.qq.com>
 ```
 
