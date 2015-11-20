@@ -21,7 +21,7 @@ load_average_command=`which uptime`
 checkServer()
 {
 	# record files
-	`$sh_command $(pwd)/monitor.sh`
+	`$sh_command $(cd "$(dirname "$0")"; pwd)/monitor.sh`
 
 	GENERAL_CHECK=`$top_command -b -d ${DELAY} -n ${COUNT}`
 	GENERAL_CHECK_TITLE="===============================General Check================================"
