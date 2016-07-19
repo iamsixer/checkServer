@@ -69,7 +69,8 @@ Cpu=`sar | awk '/Average/ {print int($3)}'`
 # 系统负载
 Load=`uptime | awk '{print $NF}'`
 # Database Delete Number
-DeleteNum=`cat mysql.log | grep delete | wc -l | awk '{print int($1)}'`
+DeleteNum=`cat /var/log/mysql/mysql.log | grep delete | wc -l | awk '{print int($1)}'`
+CreateNum=`cat /var/log/mysql/mysql.log | grep "CREATE TABLE" | wc -l | awk '{print int($1)}'`
 
 if $NORMAL_CHECK;then
 	$(checkServer "Check_Server_Log" $2);
@@ -89,8 +90,8 @@ else
 		$(checkServer "Load_Average_Warning!" $2);
 	fi
 
-	if [ $DeleteNum -gt 0 ];then
-		EMAIL_CONTENT="Database Delete Warning! Current Delete Opeations $DeleteNum%\n"
-		$(checkServer "MySQL_Warning!" $3);
+	if [ $DeleteNum -gt 0 ] || [ $CreateNum -gt 10 ];then
+		EMAIL_CONTENT="Database Warning! Current Delete Opeations $DeleteNum , Current Create Tables Operations $CreateNum %\n"
+		$(checkServer "MySQL_Warning!" $2);
 	fi
 fi
