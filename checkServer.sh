@@ -68,6 +68,8 @@ Mem=$(awk 'BEGIN{print int('$used_mem'/'$total_mem'*100) }')
 Cpu=`sar | awk '/Average/ {print int($3)}'`
 # 系统负载
 Load=`uptime | awk '{print $NF}'`
+# Database Delete Number
+DeleteNum=`cat mysql.log | grep delete | wc -l | awk '{print int($1)}'`
 
 if $NORMAL_CHECK;then
 	$(checkServer "Check_Server_Log" $2);
@@ -84,6 +86,11 @@ else
 
 	if [ $(awk 'BEGIN{if('$Load'>'$MAX_load_average') {printf 1} else {print 0}}') -eq 1 ];then
 		EMAIL_CONTENT="Load Average Warning! Current $Load%, which is greater than the max_load_average $MAX_load_average%\n"
-		$(checkServer "Load_Average_Warning!");
+		$(checkServer "Load_Average_Warning!" $2);
+	fi
+
+	if [ $DeleteNum -gt 0 ];then
+		EMAIL_CONTENT="Database Delete Warning! Current Delete Opeations $DeleteNum%\n"
+		$(checkServer "MySQL_Warning!" $3);
 	fi
 fi
