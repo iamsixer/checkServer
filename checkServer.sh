@@ -70,7 +70,7 @@ Cpu=`sar | awk '/Average/ {print int($3)}'`
 Load=`uptime | awk '{print $NF}'`
 # Database Delete Number
 DeleteNum=`cat /var/log/mysql/mysql.log | grep delete | wc -l | awk '{print int($1)}'`
-CreateNum=`cat /var/log/mysql/mysql.log | grep "CREATE TABLE" | wc -l | awk '{print int($1)}'`
+CreateNum=`cat /var/log/mysql/mysql.log | grep "CREATE DATABASE" | wc -l | awk '{print int($1)}'`
 
 if $NORMAL_CHECK;then
 	$(checkServer "Check_Server_Log" $2);
