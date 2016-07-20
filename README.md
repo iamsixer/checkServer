@@ -46,7 +46,7 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 
 ##### more details in [http://www.wilf.cn/post/centos-mutt-msmtp-setup.html](http://www.wilf.cn/post/centos-mutt-msmtp-setup.html)
 
-## 2. Crontab
+### 2. Crontab
 
 - If you want to run the script at a fixed time, you can use **Crontab**.
 
@@ -83,7 +83,7 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 0 * * * * sh /home/checkServer/checkServer.sh false
 ```
 
-## 3. Shell
+### 3. Shell
 
 #### Parameters
 
@@ -142,7 +142,11 @@ Cannot open /var/log/sysstat/sa16: No such file or directory
 Please check if data collecting is enabled in /etc/default/sysstat
 ```
 
-## 4. How to use
+### 4. MySQL
+
+This script also monitor the `mysql.log` whether there're some unexpected operations like **DELETE** and **DROP TABLE**. Before you run this script, you have to enable log of your MySQL by following the [tutorial](https://aleen42.gitbooks.io/personalwiki/content/qa/mysql_log.html). If there're some problems about `mysql.log`, you can check it on your server, or just check the email of operations item. `clearMySQLManually` is a shell script for cleanning `mysql.log` safely in manual.
+
+### 5. How to use
 
 #### Clone
 
@@ -170,3 +174,15 @@ sar
 sh ./checkServer/checkServer.sh <options: true> <email_addr: aleen42@vip.qq.com>
 ```
 
+#### Check with crontab
+
+```bash
+# Normal Check at 9 pm.
+0 21 * * * sh ~/checkServer/checkServer.sh true aleen42@vip.qq.com
+
+# Clear MySQLLog automatically if there are not exceptions
+0 21 * * * sh ~/checkServer/clearMySQLLog.sh
+
+# Warning Check within each 10 minutes
+*/10 * * * * sh ~/checkServer/checkServer.sh false aleen42@vip.qq.com
+```
