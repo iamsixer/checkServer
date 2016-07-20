@@ -93,15 +93,16 @@ else
 	fi
 
 	if ([ $DeleteNum -gt 0 ] && [ $LastDeleteNum != $DeleteNum ]) || ([ $DropNum -gt 0 ] && [ $LastDropNum != $DropNum ]);then
-		EMAIL_CONTENT="Database Warning! Current Delete Opeations $DeleteNum , Current Drop Tables Operations $DropNum \n"
-		$(checkServer "MySQL_Warning!" $2);
-
 		if [ $DeleteNum -gt 0 ];then
+			EMAIL_CONTENT="Database Warning! Current Delete Opeations $DeleteNum ( $(($DeleteNum - $LastDeleteNum)) new!!) \n========================== Operations ========================== \n`cat /var/log/mysql/mysql.log | grep delete | tail -n $(($DeleteNum - $LastDeleteNum))` \n"
 			`echo $DeleteNum > ~/checkServer/delete.log`
 		fi
 
 		if [ $DropNum -gt 0 ];then
+			EMAIL_CONTENT="Database Warning! Current Drop Opeations $DropNum ( $(($DropNum - $LastDropNum)) new!!) \n========================== Operations ========================== \n`cat /var/log/mysql/mysql.log | gre    p "DROP TABLE" | tail -n $(($DropNum - $LastDropNum))` \n"
 			`echo $DropNum > ~/checkServer/drop.log`
 		fi
+
+		$(checkServer "MySQL_Warning!" $2);
 	fi
 fi
