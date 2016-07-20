@@ -70,7 +70,9 @@ Cpu=`sar | awk '/Average/ {print int($3)}'`
 Load=`uptime | awk '{print $NF}'`
 # Database Delete Number
 DeleteNum=`cat /var/log/mysql/mysql.log | grep delete | wc -l | awk '{print int($1)}'`
-CreateNum=`cat /var/log/mysql/mysql.log | grep "CREATE DATABASE" | wc -l | awk '{print int($1)}'`
+DropNum=`cat /var/log/mysql/mysql.log |grep "DROP TABLE" | wc -l | awk '{print int($1)}'`
+LastDeleteNum=`cat ~/checkServer/delete.log | awk '{print int($1)}'`
+LastDropNum=`cat ~/checkServer/drop.log | awk '{print int($1)}'`
 
 if $NORMAL_CHECK;then
 	$(checkServer "Check_Server_Log" $2);
@@ -90,8 +92,16 @@ else
 		$(checkServer "Load_Average_Warning!" $2);
 	fi
 
-	if [ $DeleteNum -gt 0 ] || [ $CreateNum -gt 10 ];then
-		EMAIL_CONTENT="Database Warning! Current Delete Opeations $DeleteNum , Current Create Tables Operations $CreateNum %\n"
+	if ([ $DeleteNum -gt 0 ] && [ $LastDeleteNum != $DeleteNum ]) || ([ $DropNum -gt 0 ] && [ $LastDropNum != $DropNum ]);then
+		EMAIL_CONTENT="Database Warning! Current Delete Opeations $DeleteNum , Current Drop Tables Operations $DropNum \n"
 		$(checkServer "MySQL_Warning!" $2);
+
+		if [ $DeleteNum -gt 0 ];then
+			`echo $DeleteNum > ~/checkServer/delete.log`
+		fi
+
+		if [ $DropNum -gt 0 ];then
+			`echo $DropNum > ~/checkServer/drop.log`
+		fi
 	fi
 fi
