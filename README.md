@@ -1,8 +1,8 @@
 ## checkServer
 
-### Description
-- summary: a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not.
-- license: [**MIT**](https://github.com/SoundTooth/checkServer/blob/master/LICENSE)
+[![Pay](https://img.shields.io/badge/%24-free-%23a10000.svg)](#)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/soundtooth/checkServer/master/LICENSE)
+
+**checkServer** a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not. Before using it, you have to set up some tools before.
 
 ### 1. Mutt
 
@@ -186,3 +186,9 @@ sh ./checkServer/checkServer.sh <options: true> <email_addr: aleen42@vip.qq.com>
 # Warning Check within each 10 minutes
 */10 * * * * sh ~/checkServer/checkServer.sh false aleen42@vip.qq.com
 ```
+
+#### :fuelpump: How to contribute
+
+Have an idea? Found a bug? See [how to contribute](https://aleen42.gitbooks.io/personalwiki/content/contribution.html).
+
+#### :scroll: License
