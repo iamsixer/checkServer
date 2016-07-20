@@ -1,6 +1,6 @@
 ## checkServer
 
-[![Pay](https://img.shields.io/badge/%24-free-%23a10000.svg)](#)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/soundtooth/checkServer/master/LICENSE)
+[![Pay](https://img.shields.io/badge/%24-free-%23a10000.svg)](#)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/soundtooth/checkServer/master/LICENSE) ![](https://img.shields.io/badge/%20%20Shell-%20%20%20%20136-89e051.svg)
 
 **checkServer** a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not. Before using it, you have to set up some tools before.
 
