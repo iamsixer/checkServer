@@ -1,18 +1,13 @@
-# checkServer
+## checkServer
 
-## Description
+### Description
 - summary: a shell script to check whether the **Cpu** or **Memory** of a server is normal, which will send emails to notify when it's not.
 - license: [**MIT**](https://github.com/SoundTooth/checkServer/blob/master/LICENSE)
 
-<br />
-<br />
-
-## 1. Mutt
+### 1. Mutt
 
 - This script has used **Mutt** server to send emails, so you must setup it first.
 - **Mutt**: mutt is an email client for linux in terminal, which supports *POP* and *IMAP*.
-
-<br />
 
 #### Ubuntu
 
@@ -47,14 +42,9 @@ set charset="utf-8"
 echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 ```
 
-<br />
-
 #### Fedora/CentOS
 
 ##### more details in [http://www.wilf.cn/post/centos-mutt-msmtp-setup.html](http://www.wilf.cn/post/centos-mutt-msmtp-setup.html)
-
-<br />
-<br />
 
 ## 2. Crontab
 
@@ -92,9 +82,6 @@ echo "Email Contents" | `which mutt` -s "Title" aleen42@vip.qq.com
 # excute each hour to give special notification like 'memory warning' when set "false"
 0 * * * * sh /home/checkServer/checkServer.sh false
 ```
-
-<br />
-<br />
 
 ## 3. Shell
 
